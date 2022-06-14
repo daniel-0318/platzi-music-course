@@ -1,9 +1,12 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>intro</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
+<ion-content [fullscreen]="true" class="ion-padding">
+  <swiper [keyboard]="true" [pagination]="true" [scrollbar]="true" [zoom]="true">
+    <ng-template swiperSlide *ngFor="let slide of slides" >
+      <ion-icon name="close" (click)="finish()" ></ion-icon>
+      <img src="{{slide.imageSrc}}" alt="{{slide.imageAlt}}">
+      <h1>{{ slide.title }}</h1>
+      <h2>{{slide.subTitle}}</h2>
+      <p>{{slide.description}}</p>
+      <ion-icon name="{{ slide.icon }}"></ion-icon>
+    </ng-template>
+  </swiper>
 </ion-content>
