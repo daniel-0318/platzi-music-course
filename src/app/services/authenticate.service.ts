@@ -11,9 +11,11 @@ export class AuthenticateService {
     this.storage.create();
   }
 
-  loginUser(Credential){
+  async loginUser(Credential){
+    const user = await this.storage.get("user");
     return new Promise((accept, reject)=>{
-      if(Credential.email=="test@test.com" && Credential.password == "12345"){
+      if(Credential.email== user.email&& 
+      btoa(Credential.password) == user.password){
         accept("Login correcto");
       }else{
         reject("Login incorrecto");
