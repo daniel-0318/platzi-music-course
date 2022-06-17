@@ -72,8 +72,12 @@ export class RegisterPage implements OnInit {
    }
 
 
-  registerUser(values){
-
+  registerUser(userData){
+    this.authService.registerUser(userData).then(
+      ()=>{
+        this.navCtrl.navigateBack("/login")
+      }
+    );
   }
 
   ngOnInit() {
@@ -91,6 +95,10 @@ export class RegisterPage implements OnInit {
         };
       }
     }
+  }
+
+  goToLogin(){
+    this.navCtrl.navigateBack("/login")
   }
 
 }
