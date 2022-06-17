@@ -53,4 +53,8 @@ export class LoginPage implements OnInit {
     });
   }
 
+  gotoRegister(){
+    this.navCtrl.navigateForward("/register")
+  }
+
 }
