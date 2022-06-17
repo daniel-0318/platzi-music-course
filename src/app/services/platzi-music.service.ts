@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import * as dataArtists from './artists.json';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +11,11 @@ export class PlatziMusicService {
 
   constructor(private http: HttpClient) { }
 
+  getArtists() {
+    return dataArtists;
+    }
 
   getNewReleases(): any{
-    console.log("=======================");
-    console.log(this.http.get(this.urlapi));
-    console.log("=======================");
     return this.http.get(this.urlapi);
   }
 

@@ -29,10 +29,9 @@ export class HomePage {
 
   fetchNewReleases() {
     this.musicService.getNewReleases().subscribe(release => {
-      this.artists = release.albums.items;
-      console.log(this.artists);
-      this.songs = this.artists.filter(e => e.album_type ==='single');
-      this.albums = this.artists.filter(e => e.album_type ==='album');
+      this.artists = this.musicService.getArtists().items;
+      this.songs = release.albums.items.filter(e => e.album_type ==='single');
+      this.albums = release.albums.items.filter(e => e.album_type ==='album');
     });
    }
 
