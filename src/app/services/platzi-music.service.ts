@@ -7,7 +7,7 @@ import * as dataArtists from './artists.json';
 })
 export class PlatziMusicService {
 
-  private urlapi = 'https://platzi-music-api.herokuapp.com/browse/new-releases';
+  private urlapi = 'https://platzi-music-api.herokuapp.com';
 
   constructor(private http: HttpClient) { }
 
@@ -16,7 +16,11 @@ export class PlatziMusicService {
     }
 
   getNewReleases(): any{
-    return this.http.get(this.urlapi);
+    return this.http.get(`${this.urlapi}/browse/new-releases`);
+  }
+
+  getArtistTopTracks(artistId): any {
+    return this.http.get(`${this.urlapi}/artists/${artistId}/top-tracks?country=EC`);
   }
 
 }

@@ -1,5 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { PlatziMusicService } from '../services/platzi-music.service';
+import { SongsModalPage } from '../songs-modal/songs-modal.page';
 
 @Component({
   selector: 'app-home',
@@ -20,7 +22,7 @@ export class HomePage {
     speed: 400,
   };
 
-  constructor(private musicService: PlatziMusicService) {}
+  constructor(private musicService: PlatziMusicService, private modalController: ModalController) {}
   
   // renderiza cambios en la entrada directamente en la vista
   ionViewDidEnter(){
@@ -33,6 +35,18 @@ export class HomePage {
       this.songs = release.albums.items.filter(e => e.album_type ==='single');
       this.albums = release.albums.items.filter(e => e.album_type ==='album');
     });
+   }
+
+   async showSongs(artist){
+    const songs = await this.musicService.getArtistTopTracks(artist.id);
+    const modal = await this.modalController.create({
+      component: SongsModalPage,
+      componentProps: {
+        songs: songs.tracks,
+        artist: artist.name
+      }
+    });
+    return await modal.present();
    }
 
 }

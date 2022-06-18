@@ -11,36 +11,30 @@
   <h1>Artistas</h1>
   <swiper [config]="slideOps" *ngIf="artists.length">
     <ng-template swiperSlide *ngFor="let artist of artists">
-      <div>
-        <ion-avatar>
-          <img [src]="artist.images[0].url" />
-          <span>{{artist.name}}</span>
-        </ion-avatar>
-      </div>
+      <ion-avatar (click)="showSongs(artist)">
+        <img [src]="artist.images[0].url" />
+        <span>{{artist.name}}</span>
+      </ion-avatar>
     </ng-template>
   </swiper>
 
   <h1>Albums</h1>
   <swiper [config]="slideOps" *ngIf="albums.length">
     <ng-template swiperSlide *ngFor="let album of albums">
-      <div>
-        <ion-avatar class="square-avatar">
-          <img [src]="album.images[0].url" />
-          <span>{{album.name}}</span>
-        </ion-avatar>
-      </div>
+      <ion-avatar class="square-avatar">
+        <img [src]="album.images[0].url" />
+        <span>{{album.name}}</span>
+      </ion-avatar>
     </ng-template>
   </swiper>
 
   <h1>Canciones</h1>
   <swiper [config]="slideOps" *ngIf="songs.length">
     <ng-template swiperSlide *ngFor="let song of songs">
-      <div>
-        <ion-avatar class="square-avatar">
-          <img [src]="song.images[0].url" />
-          <span>{{song.name}}</span>
-        </ion-avatar>
-      </div>
+      <ion-avatar class="square-avatar">
+        <img [src]="song.images[0].url" />
+        <span>{{song.name}}</span>
+      </ion-avatar>
     </ng-template>
   </swiper>
 </ion-content>
