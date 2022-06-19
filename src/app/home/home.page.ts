@@ -38,15 +38,22 @@ export class HomePage {
    }
 
    async showSongs(artist){
-    const songs = await this.musicService.getArtistTopTracks(artist.id);
-    const modal = await this.modalController.create({
-      component: SongsModalPage,
-      componentProps: {
-        songs: songs.tracks,
-        artist: artist.name
-      }
+    let songs_art;
+    this.musicService.getArtistTopTracks(artist.id).subscribe(async release => {
+      songs_art = release.tracks;
+      console.log("--------------");
+      console.log(release.tracks);
+      console.log("--------------");
+      const modal = await this.modalController.create({
+        component: SongsModalPage,
+        componentProps: {
+          songs: songs_art,
+          artist: artist.name
+        }
+      });
+      return await modal.present();
     });
-    return await modal.present();
+    
    }
 
 }
