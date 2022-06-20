@@ -12,7 +12,10 @@ export class HomePage {
   artists: any[] = [];
   songs: any[] = [];
   albums: any[] = [];
-  song: any ={};
+  song = {
+    playing: false,
+    name: ''
+  };
 
   slideOps = {
     loop: false,
@@ -57,6 +60,14 @@ export class HomePage {
       return await modal.present();
     });
     
+   }
+
+   play(){
+    this.song.playing=true;
+   }
+
+   pause(){
+    this.song.playing=false;
    }
 
 }
