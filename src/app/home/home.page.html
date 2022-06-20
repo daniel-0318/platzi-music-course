@@ -41,11 +41,11 @@
 <ion-footer>
   <ion-grid>
     <ion-row>
-      <ion-col class="ion-text-start">0:00</ion-col>
-      <ion-col class="ion-text-end">0:00</ion-col>
+      <ion-col class="ion-text-start">{{parseTime(current_song.currentTime) || "0:00"}}</ion-col>
+      <ion-col class="ion-text-end">{{parseTime(current_song.duration) || "0:00"}}</ion-col>
     </ion-row>
   </ion-grid>
-  <ion-progress-bar [value]="0.5"></ion-progress-bar>
+  <ion-progress-bar [value]="newTime"></ion-progress-bar>
   <ion-grid>
     <ion-row>
       <ion-col size="1">

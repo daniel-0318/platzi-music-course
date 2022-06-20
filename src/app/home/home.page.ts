@@ -12,10 +12,10 @@ export class HomePage {
   artists: any[] = [];
   songs: any[] = [];
   albums: any[] = [];
-  song = {
-    playing: false,
-    name: ''
-  };
+  current_song: any = {};
+  newTime;
+
+  song: any = {};
 
   slideOps = {
     loop: false,
@@ -63,11 +63,32 @@ export class HomePage {
    }
 
    play(){
+    this.current_song = new Audio(this.song.preview_url)
+    this.current_song.play();
+    this.current_song.addEventListener("timeupdate",()=>{
+      this.newTime = (this.current_song.currentTime / this.current_song.duration);
+    });
     this.song.playing=true;
    }
 
    pause(){
+    this.current_song.pause();
     this.song.playing=false;
+   }
+
+   parseTime(time="0.00"){
+    if(time){
+      const parTime = parseInt(time.toString().split(".")[0], 10);
+      let minutes = Math.floor(parTime/60).toString();
+      if(minutes.length==1){
+        minutes="0"+minutes;
+      }
+      let seconds = (parTime%60).toString();
+      if(seconds.length==1){
+        seconds= "0"+ seconds;
+      }
+      return minutes+ ":" + seconds;
+    }
    }
 
 }
