@@ -91,4 +91,27 @@ export class HomePage {
     }
    }
 
+   showAlbums(album) {
+    this.musicService.getAlbumTracks(album.id).subscribe(songs => {
+      this.modalAlbum(songs, album);
+    }, error => {
+      console.error(error);
+    });
+  }
+
+  async modalAlbum(songs, album) {
+    const modal = await this.modalController.create({
+      component: SongsModalPage,
+      componentProps: {
+        songs: songs.items,
+        artist: album.name
+      }
+    });
+  
+    modal.onDidDismiss().then(dataReturned => {
+      this.song = dataReturned.data;
+      });
+      return modal.present();
+    }
+
 }

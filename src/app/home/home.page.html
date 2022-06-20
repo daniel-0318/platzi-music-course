@@ -21,8 +21,8 @@
   <h1>Albums</h1>
   <swiper [config]="slideOps" *ngIf="albums.length">
     <ng-template swiperSlide *ngFor="let album of albums">
-      <ion-avatar class="square-avatar">
-        <img [src]="album.images[0].url" />
+      <ion-avatar (click)="showAlbums(album)" class="square-avatar">
+        <img [src]="album.images[0].url" alt="">
         <span>{{album.name}}</span>
       </ion-avatar>
     </ng-template>

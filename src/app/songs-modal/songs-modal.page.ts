@@ -19,6 +19,7 @@ export class SongsModalPage {
   }
 
   async selectSong(song){
+    console.log("Song seleccionada " + song);
     await this.modalController.dismiss(song);
   }
 
