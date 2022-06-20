@@ -12,6 +12,7 @@ export class HomePage {
   artists: any[] = [];
   songs: any[] = [];
   albums: any[] = [];
+  song: any ={};
 
   slideOps = {
     loop: false,
@@ -41,9 +42,6 @@ export class HomePage {
     let songs_art;
     this.musicService.getArtistTopTracks(artist.id).subscribe(async release => {
       songs_art = release.tracks;
-      console.log("--------------");
-      console.log(release.tracks);
-      console.log("--------------");
       const modal = await this.modalController.create({
         component: SongsModalPage,
         componentProps: {
@@ -51,6 +49,11 @@ export class HomePage {
           artist: artist.name
         }
       });
+
+      modal.onDidDismiss().then(dataReturned=>{
+        this.song = dataReturned.data;
+      });
+
       return await modal.present();
     });
     
