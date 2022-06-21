@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
 
@@ -8,7 +8,7 @@ import { Storage } from '@ionic/storage-angular';
   styleUrls: ['./intro.page.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class IntroPage implements OnInit {
+export class IntroPage {
 
   slides = [
     {
@@ -38,14 +38,12 @@ export class IntroPage implements OnInit {
 
 ]
 
-  constructor(private router: Router, private storage:Storage) { }
-
-  finish(){
-    this.router.navigate(['/home']);
+  constructor(private router: Router, private storage:Storage) {
+    this.storage.create();
   }
 
-  ngOnInit() {
-    this.storage.create();
+  finish(){
     this.storage.set('isIntroShowed',true);
+    this.router.navigate(['/login']);
   }
 }

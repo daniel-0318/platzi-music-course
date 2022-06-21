@@ -40,9 +40,9 @@
 </ion-content>
 <ion-footer>
   <ion-grid>
-    <ion-row>
-      <ion-col class="ion-text-start">{{parseTime(current_song.currentTime) || "0:00"}}</ion-col>
-      <ion-col class="ion-text-end">{{parseTime(current_song.duration) || "0:00"}}</ion-col>
+    <ion-row *ngIf="current_song">
+      <ion-col class="ion-text-start">{{parseTime(current_song.currentTime) || "00:00"}}</ion-col>
+      <ion-col class="ion-text-end">{{parseTime(current_song.duration) || "00:00"}}</ion-col>
     </ion-row>
   </ion-grid>
   <ion-progress-bar [value]="newTime"></ion-progress-bar>

@@ -27,6 +27,7 @@ export class MenuPage implements OnInit {
 
   gotoSettings(){
     this.navCtrl.navigateRoot("/menu/settings");
+    this.menu.close();
   }
  
 
