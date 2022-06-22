@@ -8,5 +8,12 @@
 </ion-header>
 
 <ion-content>
-  <google-map></google-map>
+  <google-map *ngIf="currentCenter" [center]="center" [zoom]="defaultZoom">
+    <map-marker
+    [position]="center"
+    icon = 'assets/img/bicycle.png'></map-marker>
+    <map-polyline *ngIf="coordinates"
+      strokeColor='red' [path]="coordinates">
+    </map-polyline>
+  </google-map>
 </ion-content>
