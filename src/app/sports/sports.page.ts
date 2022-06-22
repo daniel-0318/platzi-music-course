@@ -57,6 +57,7 @@ export class SportsPage {
   }
 
   async getTracks(keywords) {
+    keywords = keywords.target.value
     this.searching = true;
     if(keywords.length > 0) {
       this.songService.searchTracks(keywords)

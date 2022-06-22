@@ -18,7 +18,7 @@
   </google-map>
   
   <div class="ion-padding">
-    <ion-searchbar (keyup)="getTracks($event.target.value)"></ion-searchbar>
+    <ion-searchbar (ionInput)="getTracks($event)"></ion-searchbar>
 
     <h2>Tracks</h2>
 
