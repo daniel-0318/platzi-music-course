@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 
 import { Geolocation } from '@capacitor/geolocation';
 
+import { Song } from '../models/song.model';
+import { PlatziMusicService } from '../services/platzi-music.service';
+
 @Component({
   selector: 'app-sports',
   templateUrl: './sports.page.html',
@@ -13,8 +16,14 @@ export class SportsPage {
   coordinates: google.maps.LatLngLiteral[] = [];
   defaultZoom = 14;
   center: google.maps.LatLngLiteral;
+  
+  searching = false;
+  text = 'Ingrese la canción a buscar';
+  songs: Song[];
+  song: Song;
+  currentSong: HTMLAudioElement;
 
-  constructor() { }
+  constructor(private songService: PlatziMusicService) { }
 
   ionViewDidEnter() {
     this.getCurrentPosition();
@@ -45,6 +54,41 @@ export class SportsPage {
         lng: position.coords.longitude
       });
     });
+  }
+
+  async getTracks(keywords) {
+    this.searching = true;
+    if(keywords.length > 0) {
+      this.songService.searchTracks(keywords)
+      .subscribe(async resp => {
+        this.songs = await resp['tracks'].items
+        .filter((item: any) => item.preview_url);
+        if (this.songs.length === 0) {
+          this.text = 'No hay resultados de la busqueda.';
+        }
+        this.searching = false;
+      });
+    } else {
+      this.text = 'Ingrese una canción a la busqueda';
+      this.songs = [];
+    }
+  }
+
+  play(song: Song) {
+    if ( this.currentSong) {
+      this.pause();
+    }
+    this.song = song;
+    this.currentSong = new Audio(this.song.preview_url);
+    this.currentSong.play();
+    this.currentSong.addEventListener('ended', () =>
+    this.song.playing = false);
+    this.song.playing = true;
+  }
+
+  pause() {
+    this.currentSong.pause();
+    this.song.playing = false;
   }
 
 }
